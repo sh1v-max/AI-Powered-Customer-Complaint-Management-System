@@ -1,0 +1,48 @@
+:root {
+  --text: #4b4a55;
+  --text-h: #111827;
+  --bg: #ffffff;
+  --border: #e5e4e7;
+  --accent: #4f3bff;
+  --accent-bg: rgba(79, 59, 255, 0.08);
+  color-scheme: light dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+h1, h2, h3 {
+  color: var(--text-h);
+  margin: 0;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #fafafa;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
