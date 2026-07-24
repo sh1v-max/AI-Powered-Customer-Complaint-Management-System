@@ -232,11 +232,11 @@ Use **Redux Toolkit** (not legacy Redux). Optionally RTK Query for the API layer
 ### Phase 0 — Setup (0.5 day)
 - [x] Folder skeleton created.
 - [x] Demo video reconciled into this plan.
-- [ ] `git init`, create GitHub repo, first commit.
-- [ ] Sign up for Groq API key (console.groq.com) — store in `backend/.env`, never commit.
-- [ ] Provision Postgres (Neon/Supabase free tier or local via Docker).
-- [ ] Backend: `python -m venv .venv`, install `fastapi uvicorn sqlalchemy alembic psycopg2-binary langgraph langchain-groq python-multipart pypdf python-docx mailparser python-dotenv pydantic`.
-- [ ] Frontend: `npm create vite@latest frontend -- --template react`, install `@reduxjs/toolkit react-redux axios react-dropzone @fontsource/inter`.
+- [x] `git init`, create GitHub repo, first commit — repo: `sh1v-max/AI-Powered-Customer-Complaint-Management-System`.
+- [ ] Sign up for Groq API key (console.groq.com) — store in `backend/.env`, never commit. **Still needed before Phase 2 can actually call the LLM.**
+- [ ] Provision Postgres (Neon/Supabase free tier or local via Docker). **Still needed before Phase 1 migrations can run.**
+- [x] Backend: `.venv` created, all deps installed (`fastapi`, `langgraph`, `langchain-groq`, `sqlalchemy`, `alembic`, `pypdf`, `python-docx`, `mail-parser`, etc.) — `backend/app/main.py` boots and `/api/health` responds.
+- [x] Frontend: Vite + React scaffolded, `@reduxjs/toolkit react-redux axios react-dropzone @fontsource/inter` installed — dev server verified rendering the two-panel layout in a browser.
 
 ### Phase 1 — Backend foundation (0.5–1 day)
 - [ ] SQLAlchemy models: `drafts`, `documents`, `chat_messages`, `complaints`, `ai_analysis`.
@@ -255,11 +255,11 @@ Use **Redux Toolkit** (not legacy Redux). Optionally RTK Query for the API layer
 - [ ] Test the full loop manually: paste a complaint → check extraction → send a correction message → check it patches instead of overwriting → ask a question → check it doesn't touch the fields.
 
 ### Phase 3 — Frontend foundation (1–1.5 days)
-- [ ] Vite + Redux Toolkit store wiring, `draftSlice`.
-- [ ] `ComplaintForm` component with the 3 (or more) sections, controlled inputs bound to `draftSlice.fields`.
-- [ ] `AIRiskAssessmentCard` component, visually distinct styling.
-- [ ] `CopilotPanel` shell: chat feed, single input with text + paperclip attachment, status badge.
-- [ ] Apply Inter font + styling to resemble the real demo UI (not just the PDF mock).
+- [x] Vite + Redux Toolkit store wiring, `draftSlice` (fields, missingFields, riskAssessment, status, chatMessages — chat responses replace state wholesale, per the "backend owns merges" design decision).
+- [x] `ComplaintForm` component with all 4 sections + status badge, static/read-only for now (not yet bound to real extraction — inputs render placeholders until Phase 4 wiring).
+- [x] AI risk assessment card built directly into `ComplaintForm` (not split into a separate component — reconsider splitting out `AIRiskAssessmentCard` once it needs independent edit state in Phase 4).
+- [x] `CopilotPanel` shell: chat feed, single input with text + paperclip attachment, "Powered by LangGraph" footer.
+- [x] Inter font applied via `@fontsource/inter`; layout styled to closely resemble the actual demo video (purple accent AI card, status badge, two-column split) — verified rendering correctly via a headless browser screenshot, no console errors.
 
 ### Phase 4 — Integration: chat-driven intake, correction, commit (1–1.5 days)
 - [ ] Wire `CopilotPanel` input (text + attachment) to `POST /api/drafts/{draft_id}/chat`.
